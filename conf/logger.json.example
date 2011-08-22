@@ -1,0 +1,114 @@
+{
+  "appenders": [
+    { 
+      "category": "Nami.Client", 
+      "type": "logLevelFilter",
+      "level": "DEBUG",
+      "appender": {
+        "type": "file",
+        "filename": "/tmp/nami.log"
+      }
+    },
+    { 
+      "category": "Nami.Client", 
+      "type": "logLevelFilter",
+      "level": "DEBUG",
+      "appender": {
+        "type": "console"
+      }
+    },
+    { 
+      "category": "AsterTrace.App", 
+      "type": "logLevelFilter",
+      "level": "DEBUG",
+      "appender": {
+        "type": "console"
+      }
+    },
+    { 
+      "category": "AsterTrace.App", 
+      "type": "logLevelFilter",
+      "level": "DEBUG",
+      "appender": {
+        "type": "file",
+        "filename": "/tmp/nami.log"
+      }
+    },
+    { 
+      "category": "AsterTrace.WebSocket", 
+      "type": "logLevelFilter",
+      "level": "DEBUG",
+      "appender": {
+        "type": "console"
+      }
+    },
+    { 
+      "category": "AsterTrace.WebSocket", 
+      "type": "logLevelFilter",
+      "level": "DEBUG",
+      "appender": {
+        "type": "file",
+        "filename": "/tmp/nami.log"
+      }
+    },
+    { 
+      "category": "AsterTrace.Mongo.Event", 
+      "type": "logLevelFilter",
+      "level": "DEBUG",
+      "appender": {
+        "type": "console"
+      }
+    },
+    { 
+      "category": "AsterTrace.Mongo.Event", 
+      "type": "logLevelFilter",
+      "level": "DEBUG",
+      "appender": {
+        "type": "file",
+        "filename": "/tmp/nami.log"
+      }
+    },
+    { 
+      "category": "AsterTrace.Mongo.Call", 
+      "type": "logLevelFilter",
+      "level": "DEBUG",
+      "appender": {
+        "type": "console"
+      }
+    },
+    { 
+      "category": "AsterTrace.Mongo.Call", 
+      "type": "logLevelFilter",
+      "level": "DEBUG",
+      "appender": {
+        "type": "file",
+        "filename": "/tmp/nami.log"
+      }
+    },
+    { 
+      "category": "AsterTrace.Express", 
+      "type": "logLevelFilter",
+      "level": "DEBUG",
+      "appender": {
+        "type": "console"
+      }
+    },
+    { 
+      "category": "AsterTrace.Express", 
+      "type": "logLevelFilter",
+      "level": "DEBUG",
+      "appender": {
+        "type": "file",
+        "filename": "/tmp/nami.log"
+      }
+    }
+  ],
+  "levels": {
+    "Nami.Client":  "ERROR",
+    "AsterTrace.WebSocket":  "ERROR",
+    "AsterTrace.App":  "ERROR",
+    "AsterTrace.Mongo.Event":  "ERROR",
+    "AsterTrace.Mongo.Call":  "ERROR",
+    "AsterTrace.Express":  "ERROR"
+  }
+}

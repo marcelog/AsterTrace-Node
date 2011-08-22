@@ -1,0 +1,36 @@
+NOTE: This is an experimental work. It works, but it's still experimental. I'll be updating it and its documentation with time.
+
+Introduction
+------------
+This is very much like AsterTrace, so you might be interesting in checking that out too, 
+at http://marcelog.github.com/articles/php_asterisk_listener_example_using_pami_and_ding.html
+
+Optional Requirements
+---------------------
+ * socket.io (to accept websocket clients, tested with 0.7.8)
+ * mongoose (to save events and outgoing calls to mongo database, tested with 1.8.1)
+ * express (to use the rest api, tested with 2.4.4)
+
+Installation
+------------
+$ npm install log4js
+$ npm install nami
+$ npm install mongoose
+$ npm install express
+$ npm install socket.io
+
+Configuration
+-------------
+1.- Copy/rename conf/config.example.js to conf/config.js. Edit it to suit your needs.
+Every resource/listener has a property "enable" to enable (doh) or not the feature.
+2.- Copy/rename conf/nami.logger.json.example to conf/nami.logger.json. This is
+effectively the configuration file for log4js.
+3.- run with "node src/index.js".
+
+Listeners
+---------
+* Call:
+* Event:
+* WebSocket:
+
+

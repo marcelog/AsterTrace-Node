@@ -1,0 +1,7 @@
+.project
+.settings
+.buildpath
+src/node_modules
+conf/logger.json
+conf/config.js
+
