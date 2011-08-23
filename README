@@ -23,9 +23,12 @@ Configuration
 -------------
 1.- Copy/rename conf/config.example.js to conf/config.js. Edit it to suit your needs.
 Every resource/listener has a property "enable" to enable (doh) or not the feature.
-2.- Copy/rename conf/nami.logger.json.example to conf/nami.logger.json. This is
+2.- Copy/rename conf/logger.json.example to conf/logger.json. This is
 effectively the configuration file for log4js.
-3.- run with "node src/index.js".
+
+Running it
+----------
+$ NODE_ENV=production NAMI_CONFIG_DIR=conf node src/index.js
 
 Listeners
 ---------
