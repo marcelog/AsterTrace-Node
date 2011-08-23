@@ -40,7 +40,7 @@ function load() {
 function sendAction() {
     NamiDispatcher.send(
         document.getElementById('actionName').value,
-        eval(document.getElementById('actionArguments').value)
+        eval('(' + document.getElementById('actionArguments').value + ')')
     );
 };
 </script>
@@ -53,6 +53,8 @@ function sendAction() {
            <td>
                <select id="actionName">
                    <option selected value="CoreShowChannels">CoreShowChannels</option>
+                   <option selected value="Ping">Ping</option>
+                   <option selected value="Hangup">Hangup</option>
                </select>
            </td>
        </tr>
