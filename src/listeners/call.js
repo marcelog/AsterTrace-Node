@@ -50,27 +50,27 @@ CallListener.prototype.getCall = function (uniqueId, callback) {
 
 CallListener.prototype.onVarSet = function (event) {
     var self = this;
-    if (event.Variable == 'DIALEDTIME') {
+    if (event.variable == 'DIALEDTIME') {
         this.logger.debug('Set DIALEDTIME: ' + util.inspect(event));
-        this.getCall(event.Uniqueid, function(call) {
+        this.getCall(event.uniqueid, function(call) {
             if (call !== null) {
-                call.dialedTime = event.Value;
+                call.dialedTime = event.value;
                 self.saveCall(call);
             }
         });
-    } else if (event.Variable == 'ANSWEREDTIME') {
+    } else if (event.variable == 'ANSWEREDTIME') {
         this.logger.debug('Set ANSWEREDTIME: ' + util.inspect(event));
-        this.getCall(event.Uniqueid, function(call) {
+        this.getCall(event.uniqueid, function(call) {
             if (call !== null) {
-                call.answeredTime = event.Value;
+                call.answeredTime = event.value;
                 self.saveCall(call);
             }
         });
-    } else if (event.Variable == 'HANGUPCAUSE') {
+    } else if (event.variable == 'HANGUPCAUSE') {
         this.logger.debug('Set HANGUPCAUSE: ' + util.inspect(event));
-        this.getCall(event.Uniqueid, function(call) {
+        this.getCall(event.uniqueid, function(call) {
             if (call !== null) {
-                call.hangupCause = event.Value;
+                call.hangupCause = event.value;
                 call.end = Date.now();
                 self.saveCall(call);
             }
@@ -81,21 +81,21 @@ CallListener.prototype.onVarSet = function (event) {
 CallListener.prototype.onDial = function (event) {
     var callEntity = new this.mongo.CallModel();
     var self = this;
-    if (event.SubEvent === 'Begin') {
+    if (event.subevent === 'Begin') {
         this.logger.debug('Begin Call: ' + util.inspect(event));
-        callEntity.channel1 = event.Channel;
-        callEntity.uniqueId1 = event.UniqueID;
-        callEntity.channel2 = event.Destination;
-        callEntity.uniqueId2 = event.DestUniqueID;
-        callEntity.dialString = event.Dialstring;
-        callEntity.clidNum = event.CallerIDNum;
-        callEntity.clidName = event.CallerIDName;
+        callEntity.channel1 = event.channel;
+        callEntity.uniqueId1 = event.uniqueid;
+        callEntity.channel2 = event.destination;
+        callEntity.uniqueId2 = event.destuniqueid;
+        callEntity.dialString = event.dialstring;
+        callEntity.clidNum = event.calleridnum;
+        callEntity.clidName = event.calleridname;
         this.saveCall(callEntity);
-    } else if (event.SubEvent === 'End') {
+    } else if (event.subevent === 'End') {
         this.logger.debug('End Call: ' + util.inspect(event));
-        this.getCall(event.UniqueID, function(call) {
+        this.getCall(event.uniqueid, function(call) {
             if (call !== null) {
-                call.dialStatus = event.DialStatus;
+                call.dialStatus = event.dialstatus;
                 self.saveCall(call);
             }
         });

@@ -33,9 +33,9 @@ EventListener.prototype.onEventToMongo = function (event) {
     }
     this.logger.debug('Saving event: ' + util.inspect(event));
     var eventEntity = new this.mongo.EventModel();
-    eventEntity.uniqueId = typeof(event.Uniqueid) !== 'undefined' ? event.Uniqueid : '';
-    eventEntity.name = typeof(event.Event) !== 'undefined' ? event.Event : '';
-    eventEntity.channel = typeof(event.Channel) !== 'undefined' ? event.Channel : '';
+    eventEntity.uniqueId = typeof(event.uniqueid) !== 'undefined' ? event.uniqueid : '';
+    eventEntity.name = typeof(event.event) !== 'undefined' ? event.event : '';
+    eventEntity.channel = typeof(event.channel) !== 'undefined' ? event.channel : '';
     eventEntity.event = JSON.stringify(event); 
     eventEntity.save(function (err) {
         if (err !== null) {
