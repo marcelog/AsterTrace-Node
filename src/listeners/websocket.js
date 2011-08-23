@@ -51,7 +51,7 @@ WebSocketListener.prototype.onWebSocketMessage = function (message, socket) {
         + ': ' + util.inspect(message)
     );
     message = JSON.parse(message);
-    var action = new namiAction.Action[message.name]();
+    var action = new namiAction.Actions[message.name]();
     for (prop in message.arguments) {
         action.set(prop, message.arguments[prop]);
     }
