@@ -53,6 +53,11 @@ function sendAction() {
            <td>
                <select id="actionName">
                    <option selected value="CoreShowChannels">CoreShowChannels</option>
+                   <option selected value="CoreStatus">CoreStatus</option>
+                   <option selected value="CoreSettings">CoreSettings</option>
+                   <option selected value="ListCommands">ListCommands</option>
+                   <option selected value="Status">Status</option>
+                   <option selected value="DahdiShowChannels">DahdiShowChannels</option>
                    <option selected value="Ping">Ping</option>
                    <option selected value="Hangup">Hangup</option>
                </select>
@@ -60,7 +65,7 @@ function sendAction() {
        </tr>
        <tr>
            <td>Arguments</td>
-           <td><input type="text" size="32" id="actionArguments"/></td>
+           <td><input type="text" size="32" value="{}" id="actionArguments"/></td>
        </tr>
        <tr>
            <td><input type="submit" onClick="sendAction()"/></td>
