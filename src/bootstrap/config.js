@@ -17,8 +17,10 @@
  *
  */
 exports.bootstrap = function (resources) {
+    var NamiConfig;
     eval(require('fs').readFileSync(
-    	process.env.NAMI_CONFIG_DIR + '/config.js', encoding='ascii'
+        process.env.NAMI_CONFIG_DIR + '/config.js',
+        'ascii'
     ));
     NamiConfig.dir = process.env.NAMI_CONFIG_DIR;
     return NamiConfig;

@@ -27,7 +27,7 @@ function CallListener(resources) {
     this.mongo = this.resources.mongo;
     this.resources.nami.on('namiEventDial', function (event) { self.onDial(event); });
     this.resources.nami.on('namiEventVarSet', function (event) { self.onVarSet(event); });
-};
+}
 util.inherits(CallListener, events.EventEmitter);
 
 CallListener.prototype.saveCall = function (call) {
@@ -36,10 +36,10 @@ CallListener.prototype.saveCall = function (call) {
             this.logger.error("Error saving call: " + err);
         }
     });
-}
+};
 
 CallListener.prototype.getCall = function (uniqueId, callback) {
-    this.mongo.CallModel.findOne( {uniqueId1: uniqueId}, function(err, obj) {
+    this.mongo.CallModel.findOne({uniqueId1: uniqueId}, function (err, obj) {
         if (err !== null) {
             this.logger.error("Error getting call: " + err);
         } else {
@@ -50,25 +50,25 @@ CallListener.prototype.getCall = function (uniqueId, callback) {
 
 CallListener.prototype.onVarSet = function (event) {
     var self = this;
-    if (event.variable == 'DIALEDTIME') {
+    if (event.variable === 'DIALEDTIME') {
         this.logger.debug('Set DIALEDTIME: ' + util.inspect(event));
-        this.getCall(event.uniqueid, function(call) {
+        this.getCall(event.uniqueid, function (call) {
             if (call !== null) {
                 call.dialedTime = event.value;
                 self.saveCall(call);
             }
         });
-    } else if (event.variable == 'ANSWEREDTIME') {
+    } else if (event.variable === 'ANSWEREDTIME') {
         this.logger.debug('Set ANSWEREDTIME: ' + util.inspect(event));
-        this.getCall(event.uniqueid, function(call) {
+        this.getCall(event.uniqueid, function (call) {
             if (call !== null) {
                 call.answeredTime = event.value;
                 self.saveCall(call);
             }
         });
-    } else if (event.variable == 'HANGUPCAUSE') {
+    } else if (event.variable === 'HANGUPCAUSE') {
         this.logger.debug('Set HANGUPCAUSE: ' + util.inspect(event));
-        this.getCall(event.uniqueid, function(call) {
+        this.getCall(event.uniqueid, function (call) {
             if (call !== null) {
                 call.hangupCause = event.value;
                 call.end = Date.now();
@@ -79,8 +79,7 @@ CallListener.prototype.onVarSet = function (event) {
 };
 
 CallListener.prototype.onDial = function (event) {
-    var callEntity = new this.mongo.CallModel();
-    var self = this;
+    var self = this, callEntity = new this.mongo.CallModel();
     if (event.subevent === 'Begin') {
         this.logger.debug('Begin Call: ' + util.inspect(event));
         callEntity.channel1 = event.channel;
@@ -93,14 +92,14 @@ CallListener.prototype.onDial = function (event) {
         this.saveCall(callEntity);
     } else if (event.subevent === 'End') {
         this.logger.debug('End Call: ' + util.inspect(event));
-        this.getCall(event.uniqueid, function(call) {
+        this.getCall(event.uniqueid, function (call) {
             if (call !== null) {
                 call.dialStatus = event.dialstatus;
                 self.saveCall(call);
             }
         });
     }
-}
+};
 
 CallListener.prototype.shutdown = function () {
 };

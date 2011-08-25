@@ -18,7 +18,7 @@
  */
 exports.bootstrap = function (resources) {
 	var io = require('socket.io').listen(resources.config.resources.websocket.port);
-    io.configure(function() {
+    io.configure(function () {
        /* XXX Does this actually work at all? */
        //io.set('logger', resources.logger.getLogger('Nami.WebSocket'));
     });

@@ -39,7 +39,7 @@ function MyApp() {
     this.resources.nami.on('namiLoginIncorrect', function () {
         self.onLoginIncorrect();
     });
-};
+}
 
 MyApp.prototype.quit = function () {
     this.logger.info('Quitting');

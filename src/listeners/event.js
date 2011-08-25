@@ -25,7 +25,7 @@ function EventListener(resources) {
     this.resources.nami.on('namiEvent', function (event) {
         self.onEventToMongo(event);
     });
-};
+}
 
 EventListener.prototype.onEventToMongo = function (event) {
     if (event.Event === 'DTMF') {
@@ -33,9 +33,9 @@ EventListener.prototype.onEventToMongo = function (event) {
     }
     this.logger.debug('Saving event: ' + util.inspect(event));
     var eventEntity = new this.mongo.EventModel();
-    eventEntity.uniqueId = typeof(event.uniqueid) !== 'undefined' ? event.uniqueid : '';
-    eventEntity.name = typeof(event.event) !== 'undefined' ? event.event : '';
-    eventEntity.channel = typeof(event.channel) !== 'undefined' ? event.channel : '';
+    eventEntity.uniqueId = typeof (event.uniqueid) !== 'undefined' ? event.uniqueid : '';
+    eventEntity.name = typeof (event.event) !== 'undefined' ? event.event : '';
+    eventEntity.channel = typeof (event.channel) !== 'undefined' ? event.channel : '';
     eventEntity.event = JSON.stringify(event); 
     eventEntity.save(function (err) {
         if (err !== null) {

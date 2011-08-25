@@ -17,12 +17,11 @@
  *
  */
 exports.bootstrap = function (resources) {
-    var mongo = require("../models/mongo.js");
-    var config = resources.config.resources.mongo;
+    var mongo = require("../models/mongo.js"), config = resources.config.resources.mongo;
     mongo.mongoose.connect(
-    	'mongodb://' + config.user + ':' + config.password
-    	+ '@' + config.host + ':' + config.port
-    	+ '/' + config.dbname
+        'mongodb://' + config.user + ':' + config.password
+            + '@' + config.host + ':' + config.port
+            + '/' + config.dbname
     );
     return mongo;
 };

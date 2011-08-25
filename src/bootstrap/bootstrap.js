@@ -17,6 +17,7 @@
  *
  */
 exports.shutdown = function () {
+    var listener, resource;
     for (listener in exports.listeners) {
         shutdownListener(listener);
     }
@@ -49,35 +50,32 @@ function shutdownResource(resource) {
     if (exports.resources[resource] !== null) {
         exports.logger.debug('Shutting down resource: ' + resource);
         exports.resources[resource]
-            = require("./" + resource + ".js").shutdown(exports.resources)
-        ;
+            = require("./" + resource + ".js").shutdown(exports.resources);
     }
-};
+}
 
 function shutdownListener(listener) {
     if (exports.resources.config.listeners[listener].enable === true) {
         exports.logger.debug('Stopping Listener: ' + listener);
         exports.listeners[listener]
-            = require("../listeners/" + listener + ".js").shutdown(exports.resources)
-        ;
+            = require("../listeners/" + listener + ".js").shutdown(exports.resources);
     }
-};
+}
 
 function bootstrapResource(resource) {
     if (exports.logger !== null) {
         exports.logger.debug('Bootstrapping: ' + resource);
     }
     exports.resources[resource]
-        = require("./" + resource + ".js").bootstrap(exports.resources)
-    ;
-};
+        = require("./" + resource + ".js").bootstrap(exports.resources);
+}
 
 function bootstrapListener(listener) {
     if (exports.resources.config.listeners[listener].enable === true) {
         exports.logger.debug('Starting listener: ' + listener);
         exports.listeners[listener] = require("../listeners/" + listener + ".js").run(exports.resources);
     }
-};
+}
 
 exports.run = function () {
     bootstrapResource('config');

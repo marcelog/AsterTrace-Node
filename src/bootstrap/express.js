@@ -17,23 +17,23 @@
  *
  */
 exports.bootstrap = function (resources) {
-    var logger = resources.logger.getLogger('AsterTrace.Express');
-    var express = require('express');
-    var app = express.createServer();
-    app.configure(function() {
+    var logger = resources.logger.getLogger('AsterTrace.Express'),
+        express = require('express'),
+        app = express.createServer();
+    app.configure(function () {
         logger.debug('configure()');
         app.set('view engine', 'jade');
         app.use(express.static(__dirname + '/../../www'));
     });
-    app.configure('development', function() {
+    app.configure('development', function () {
         logger.debug('configure(development)');
         app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
     });
-    app.configure('production', function() {
+    app.configure('production', function () {
         logger.debug('configure(production)');
         app.use(express.errorHandler());
     });
-    app.get('/', function(req, res){
+    app.get('/', function (req, res) {
         res.send('hello world');
     });
     app.listen(resources.config.resources.express.port);

@@ -19,43 +19,44 @@
 var namiAction = require("nami");
 
 function WebSocketListener(resources) {
-	var self = this;
+    var self = this;
     this.clients = [];
     this.resources = resources;
     this.logger = require('log4js').getLogger('AsterTrace.WebSocket');
-   	this.resources.websocket.sockets.on('connection', function (socket) {
-		self.onWebSocketConnect(socket);
-	});
+    this.resources.websocket.sockets.on('connection', function (socket) {
+        self.onWebSocketConnect(socket);
+    });
     this.resources.nami.on('namiEvent', function (event) {
         self.onEventToClients(event);
     });
-};
+}
 
 WebSocketListener.prototype.onEventToClients = function (event) {
+    var client;
     if (event.Event === 'DTMF') {
         return;
     }
     for (client in this.clients) {
         this.logger.debug('Dispatching event: ' + util.inspect(event));
-    	this.clients[client].emit('event', event);
+        this.clients[client].emit('event', event);
     }
 };
 
 WebSocketListener.prototype.onWebSocketDisconnect = function (message, socket) {
-	this.logger.info('disconnect');
+    this.logger.info('disconnect');
 };
 WebSocketListener.prototype.onWebSocketMessage = function (message, socket) {
-    var self = this;
+    var self = this, action, prop;
     this.logger.debug(
         socket.remoteAddres + ':' + socket.remotePort
-        + ': ' + util.inspect(message)
+            + ': ' + util.inspect(message)
     );
     message = JSON.parse(message);
-    var action = new namiAction.Actions[message.name]();
+    action = new namiAction.Actions[message.name]();
     for (prop in message.arguments) {
         action.set(prop, message.arguments[prop]);
     }
-	this.resources.nami.send(action, function (response) {
+    this.resources.nami.send(action, function (response) {
         self.logger.debug('Sending response: ' + util.inspect(response));
         response.action = message.name;
         response.id = message.id;
@@ -63,8 +64,8 @@ WebSocketListener.prototype.onWebSocketMessage = function (message, socket) {
     });
 };
 WebSocketListener.prototype.onWebSocketConnect = function (socket) {
-	var self = this;
-	this.clients.push(socket);
+    var self = this;
+    this.clients.push(socket);
     socket.on('message', function (message) {
         self.onWebSocketMessage(message, socket);
     });
@@ -73,6 +74,7 @@ WebSocketListener.prototype.onWebSocketConnect = function (socket) {
     });
 };
 WebSocketListener.prototype.shutdown = function () {
+    var client;
     for (client in this.clients) {
         this.logger.debug('Disconnecting: ' + this.clients[client].address);
         this.clients[client].disconnect();
