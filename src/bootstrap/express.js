@@ -26,15 +26,7 @@ exports.bootstrap = function (resources) {
         app.set('view engine', 'jade');
         app.use(express.static(__dirname + '/../../www'));
         app.get('/calls', function (req, res, next) {
-            var pageStart = req.query.pageStart;
-            var pageLen = req.query.pageLen;
-            var dateStart = req.query.dateStart;
-            var dateEnd = req.query.dateEnd;
-            var status = req.query.status;
-            var online = req.query.online;
-            controllerMain.callsList(
-                req, res, pageStart, pageLen, dateStart, dateEnd, status
-            );
+            controllerMain.callsList(req, res);
         });
     });
     app.configure('development', function () {
