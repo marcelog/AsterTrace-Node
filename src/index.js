@@ -21,7 +21,7 @@ var util = require("util");
 function MyApp() {
 	var self = this;
     this.connected = false;
-    this.bootstrap = require("./bootstrap/bootstrap.js");
+    this.bootstrap = require(__dirname + "/bootstrap/bootstrap.js");
     this.bootstrap.run();
     this.resources = this.bootstrap.resources;
     this.listeners = this.bootstrap.listeners;
