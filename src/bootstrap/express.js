@@ -25,7 +25,7 @@ exports.bootstrap = function (resources) {
         logger.debug('configure()');
         app.set('view engine', 'jade');
         app.use(express.static(__dirname + '/../../www'));
-        app.get('/calls', function (req, res, next) {
+        app.get('/calls/list', function (req, res, next) {
             controllerMain.callsList(req, res);
         });
     });
