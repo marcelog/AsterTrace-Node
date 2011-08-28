@@ -20,13 +20,14 @@ exports.bootstrap = function (resources) {
     var logger = resources.logger.getLogger('AsterTrace.Express'),
         express = require('express'),
         app = express.createServer();
-    var controllerMain = require(__dirname + '/../controllers/main.js').mainController(resources);
+    var mainController = require(__dirname + '/../controllers/main.js').mainController(resources);
+    var callsController = require(__dirname + '/../controllers/main.js').callsController(resources);
     app.configure(function () {
         logger.debug('configure()');
         app.set('view engine', 'jade');
         app.use(express.static(__dirname + '/../../www'));
         app.get('/calls/list', function (req, res, next) {
-            controllerMain.callsList(req, res);
+            callsController.callsList(req, res);
         });
     });
     app.configure('development', function () {

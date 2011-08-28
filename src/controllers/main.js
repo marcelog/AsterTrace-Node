@@ -3,10 +3,15 @@ function MainController(resources) {
     this.logger = this.resources.logger.getLogger('AsterTrace.Express');
 }
 
+function CallsController(resources) {
+    this.resources = resources;
+    this.logger = this.resources.logger.getLogger('AsterTrace.Express');
+}
+
 MainController.prototype.home = function (req, res) {
     res.send('hello world');
 };
-MainController.prototype.callsList = function (req, res) {
+CallsController.prototype.callsList = function (req, res) {
     var pageStart = req.query.pageStart;
     var pageLen = req.query.pageLen;
     var dateStart = req.query.dateStart;
@@ -47,4 +52,5 @@ MainController.prototype.callsList = function (req, res) {
     });
 };
 
+exports.callsController = function (resources) { return new CallsController(resources); }
 exports.mainController = function (resources) { return new MainController(resources); }
