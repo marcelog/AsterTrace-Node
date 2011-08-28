@@ -20,8 +20,9 @@ exports.bootstrap = function (resources) {
     var logger = resources.logger.getLogger('AsterTrace.Express'),
         express = require('express'),
         app = express.createServer();
-    var mainController = require(__dirname + '/../controllers/main.js').mainController(resources);
-    var callsController = require(__dirname + '/../controllers/main.js').callsController(resources);
+    var controllers = require(__dirname + '/../controllers/main.js');
+    var mainController = controllers.mainController(resources);
+    var callsController = controllers.callsController(resources);
     app.configure(function () {
         logger.debug('configure()');
         app.set('view engine', 'jade');
