@@ -31,6 +31,7 @@ exports.bootstrap = function (resources) {
             var dateStart = req.query.dateStart;
             var dateEnd = req.query.dateEnd;
             var status = req.query.status;
+            var online = req.query.online;
             controllerMain.callsList(
                 req, res, pageStart, pageLen, dateStart, dateEnd, status
             );
