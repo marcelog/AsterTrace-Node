@@ -35,6 +35,48 @@ EventDispatcher.prototype.onResponse = function (response) {
 
 function load() {
     NamiDispatcher = new EventDispatcher(io.connect('http://192.168.0.10:1028/'));
+    var actions = [
+        "Login",
+        "Logoff",
+        "Ping",
+        "Hangup",
+        "CoreShowChannels",
+        "CoreStatus",
+        "CoreSettings",
+        "Status",
+        "DahdiShowChannels",
+        "ListCommands",
+        "AbsoluteTimeout",
+        "SipShowPeer",
+        "SipShowRegistry",
+        "SipQualifyPeer",
+        "SipPeers",
+        "AgentLogoff",
+        "Agents",
+        "AttendedTransfer",
+        "ChangeMonitor",
+        "Command",
+        "CreateConfig",
+        "DahdiDialOffHook",
+        "DahdiDndOff",
+        "DahdiDndOn",
+        "DahdiHangup",
+        "DahdiRestart",
+        "DbDel",
+        "DbDeltree",
+        "DbGet",
+        "DbPut",
+        "ExtensionState",
+        "GetConfig",
+        "GetConfigJson",
+        "GetVar"
+    ];
+    for (i in actions) {
+        var opt = document.createElement("option");
+        var combo = document.getElementById("actionName").options.add(opt);
+        opt.text = actions[i];
+        opt.value = actions[i];
+    }
 };
 
 function sendAction() {
@@ -52,15 +94,6 @@ function sendAction() {
            <td>Send</td>
            <td>
                <select id="actionName">
-                   <option selected value="CoreShowChannels">CoreShowChannels</option>
-                   <option selected value="CoreStatus">CoreStatus</option>
-                   <option selected value="CoreSettings">CoreSettings</option>
-                   <option selected value="ListCommands">ListCommands</option>
-                   <option selected value="Status">Status</option>
-                   <option selected value="AbsoluteTimeout">AbsoluteTimeout</option>
-                   <option selected value="DahdiShowChannels">DahdiShowChannels</option>
-                   <option selected value="Ping">Ping</option>
-                   <option selected value="Hangup">Hangup</option>
                </select>
            </td>
        </tr>
