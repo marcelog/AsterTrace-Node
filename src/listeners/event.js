@@ -19,6 +19,9 @@
 function EventListener(resources) {
 	var self = this;
     this.resources = resources;
+    if (this.resources.mongo === null) {
+        return;
+    }
     this.logger = require('log4js').getLogger('AsterTrace.Mongo.Event');
     this.logger.debug('Init');
     this.mongo = this.resources.mongo;
@@ -28,6 +31,7 @@ function EventListener(resources) {
 }
 
 EventListener.prototype.onEventToMongo = function (event) {
+    var self = this;
     if (event.Event === 'DTMF') {
         return;
     }
@@ -39,7 +43,7 @@ EventListener.prototype.onEventToMongo = function (event) {
     eventEntity.event = JSON.stringify(event); 
     eventEntity.save(function (err) {
         if (err !== null) {
-            this.logger.error("Error saving event: " + err);
+            self.logger.error("Error saving event: " + err);
         }
     });
 };

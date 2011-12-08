@@ -22,6 +22,9 @@ function CallListener(resources) {
     CallListener.super_.call(this);
 	var self = this;
     this.resources = resources;
+    if (this.resources.mongo === null) {
+        return;
+    }
     this.logger = require('log4js').getLogger('AsterTrace.Mongo.Call');
     this.logger.debug('Init');
     this.mongo = this.resources.mongo;
@@ -31,17 +34,19 @@ function CallListener(resources) {
 util.inherits(CallListener, events.EventEmitter);
 
 CallListener.prototype.saveCall = function (call) {
+    var self = this;
     call.save(function (err) {
         if (err !== null) {
-            this.logger.error("Error saving call: " + err);
+            self.logger.error("Error saving call: " + err);
         }
     });
 };
 
 CallListener.prototype.getCall = function (uniqueId, callback) {
+    var self = this;
     this.mongo.CallModel.findOne({uniqueId1: uniqueId}, function (err, obj) {
         if (err !== null) {
-            this.logger.error("Error getting call: " + err);
+            self.logger.error("Error getting call: " + err);
         } else {
             callback(obj);
         }
