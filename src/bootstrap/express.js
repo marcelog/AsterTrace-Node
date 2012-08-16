@@ -25,6 +25,9 @@ exports.bootstrap = function (resources) {
     var callsController = controllers.callsController(resources);
     app.configure(function () {
         logger.debug('configure()');
+        app.use(express.bodyParser());
+        app.use(express.cookieParser());
+        app.use(express.session({ secret: "AsterTrace-Node" }));
         app.set('view engine', 'jade');
         app.use(express.static(__dirname + '/../../www'));
         app.get('/calls/list', function (req, res, next) {
